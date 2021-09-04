@@ -17,7 +17,7 @@ namespace exercises
         */
         public bool IsLeapYear(int year)
         {
-            throw new NotImplementedException("Writing tests ..");
+            throw new NotImplementedException("Writing tests .."); //test comment
         }
     }
 }
