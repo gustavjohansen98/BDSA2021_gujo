@@ -1,4 +1,4 @@
-name: .NET
+name: CI 
 
 on:
   push:
@@ -10,6 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./00 #change this for future exercises
 
     steps:
     - uses: actions/checkout@v2
@@ -17,8 +20,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: navigate to correct folder
-      run: cd 00 #change this for new exercises 
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
