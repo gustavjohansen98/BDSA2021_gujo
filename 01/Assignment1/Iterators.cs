@@ -14,5 +14,15 @@ namespace Assignment1
         {
             throw new NotImplementedException();
         }
+
+        public static bool Even(int i) 
+        {
+            return i % 2 == 0;
+        }
+
+        public static void Main(string[] args)
+        {
+            Predicate<int> even = Even;
+        }
     }
 }
