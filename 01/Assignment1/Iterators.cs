@@ -12,8 +12,8 @@ namespace Assignment1
             return items.SelectMany(item => item);
             
             // alternative method with yield implicit implemented and looping over the outer stream
-            /* foreach(var outer in items)
-                foreach(T item in outer)   
+            /* foreach(var inner in items)
+                foreach(T item in inner)   
                     yield return item;
             */
         }
@@ -21,6 +21,11 @@ namespace Assignment1
         public static IEnumerable<T> Filter<T>(IEnumerable<T> items, Predicate<T> predicate)
         {
             return items.Where(predicate.Invoke);
+
+            // alternative :
+            // foreach(T item in items)
+            //    if (predicate.Invoke(item))
+            //        yield return item; 
         }
 
         public static bool Even(int i) 
