@@ -12,7 +12,7 @@ namespace StudentLibrary
             get 
             {
                 var now = DateTime.Now;
-                if (EndDate != null && now >= EndDate)
+                if ((EndDate != null && EndDate != DateTime.MinValue) && now >= EndDate)
                     return Status.Dropout;
                 if (now > GraduationDate)
                     return Status.Graduated;
