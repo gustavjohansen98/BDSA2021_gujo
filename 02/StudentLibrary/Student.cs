@@ -12,7 +12,7 @@ namespace StudentLibrary
             get 
             {
                 var now = DateTime.Now;
-                if (now >= EndDate)
+                if (EndDate != null && now >= EndDate)
                     return Status.Dropout;
                 if (now > GraduationDate)
                     return Status.Graduated;
@@ -22,12 +22,12 @@ namespace StudentLibrary
             }
         }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public DateTime GraduationDate { get; set; }
 
         public override string ToString()
         {
-            return $"{this.GivenName} {this.Surname} with id [{this.Id}], has status {this.Status}";
+            return $"{this.GivenName} {this.Surname} with id {this.Id}, has status {this.Status}";
         }
     }
 
