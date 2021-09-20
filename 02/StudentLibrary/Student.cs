@@ -20,6 +20,19 @@ namespace StudentLibrary
                     return Status.Active;
                 return Status.New;
             }
+            // maaah, this didn't quite work out :((
+            // get 
+            // {
+            //     DateTime now = DateTime.Now;
+            //     return now switch
+            //     {
+            //         (now > StartDate) and (now < GraduationDate)                              => Status.Active,
+            //         (EndDate != null and EndDate != DateTime.MinValue) and (now >= EndDate)   => Status.Dropout,
+            //         now > GraduationDate                                                      => Status.Graduated,                                                    
+            //         now < StartDate                                                           => Status.New,
+            //         _                                                                         => throw new InvalidProgramException("this will not work"),
+            //     }; 
+            // }
         }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
