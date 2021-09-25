@@ -12,6 +12,6 @@ namespace BDSA2020.Assignment03
         public static IEnumerable<int> GetNumbers_Exercise1(this IEnumerable<int> collection) => collection.Where( number => (number % 7 == 0) && (number > 42));
         public static IEnumerable<int> GetLeapYears(this IEnumerable<int> collection) => collection.Where( year => (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0));
         public static bool IsSecure(this Uri uri) => uri.Scheme == Uri.UriSchemeHttps;
-        public static int WordCount(this string str) => new Regex(@"[a-zA-Z]+").Matches(str).Count;
+        public static int WordCount(this string str) => new Regex(@"[a-zA-Z]+").Matches(str).Count; 
     }
 }

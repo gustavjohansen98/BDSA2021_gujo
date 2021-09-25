@@ -1,15 +1,18 @@
 using Xunit;
+using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace BDSA2020.Assignment03.Tests
 {
     public class WizardTests
     {
         [Fact]
-        public void Wizards_contains_2_wizards()
+        public void Wizards_contains_12_wizards()
         {
             var wizards = Wizard.Wizards.Value;
 
-            Assert.Equal(11, wizards.Count);
+            Assert.Equal(12, wizards.Count);
         }
 
         [Theory]
@@ -19,12 +22,14 @@ namespace BDSA2020.Assignment03.Tests
         {
             var wizards = Wizard.Wizards.Value;
 
+
             Assert.Contains(wizards, w =>
                 w.Name == name &&
                 w.Medium == medium &&
                 w.Year == year &&
                 w.Creator == creator
             );
+            
         }
     }
 }
