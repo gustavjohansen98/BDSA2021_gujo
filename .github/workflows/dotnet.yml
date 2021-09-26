@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./02 #change this for future exercises
+        working-directory: ./03 #change this for future exercises
 
     steps:
     - uses: actions/checkout@v2
