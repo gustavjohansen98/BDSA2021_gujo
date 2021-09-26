@@ -1,40 +1,53 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 
 namespace BDSA2020.Assignment03
 {
     public class Queries
     {
-        public IEnumerable<string> GetWizardnamesByCreatorLINQ(string author) 
+        private readonly IReadOnlyCollection<Wizard> wizards = Wizard.Wizards.Value;
+        public IEnumerable<string> GetWizardnamesByCreatorLINQ(string creator) 
         {
-            throw new NotImplementedException();
+            var results = from w in wizards
+                          where w.Creator.Contains(creator)
+                          select w.Name;  
+            return results;
         } 
 
-        public IEnumerable<string> GetWizardnamesByCreatorExtension(string author) 
+        public IEnumerable<string> GetWizardnamesByCreatorExtension(string creator) 
         {
-            throw new NotImplementedException();
+            return wizards.Where( w => w.Creator.Contains(creator)).Select( x => x.Name);
         } 
 
-        public int GetYearOfWizardFirstApperanceLINQ(string wizardName)
+        public int? GetYearOfWizardFirstApperanceLINQ(string wizardName)
         {
-            throw new NotImplementedException();
+            var result = from w in wizards
+                         where w.Name.Contains(wizardName)
+                         orderby w.Year
+                         select w.Year;
+            return result.FirstOrDefault();
         }
 
-        public int GetYearOfWizardFirstApperanceExtension(string wizardName)
+        public int? GetYearOfWizardFirstApperanceExtension(string wizardName)
         {
-            throw new NotImplementedException();
+            return wizards.Where( w => w.Name.Contains(wizardName)).Select( w => w.Year).Min();
         }
 
-        public IEnumerable<(string, int)> GetNamesAndYearsFromMediaLINQ(string media)
+        public IEnumerable<Tuple<string, int?>> GetNamesAndYearsFromMediaLINQ(string media)
         {
-            throw new NotImplementedException();
+            var result = from w in wizards
+                         where w.Medium.Equals(media)
+                         select new Tuple<string, int?>(w.Name, w.Year);
+
+            return result;
         }
 
-        public IEnumerable<(string, int)> GetNamesAndYearsFromMediaExtension(string media)
+        public IEnumerable<(string, int?)> GetNamesAndYearsFromMediaExtension(string media)
         {
-            throw new NotImplementedException();
+            return wizards.Where( w => w.Medium.Equals(media)).Select(w => (w.Name, w.Year));
         }
 
         public IEnumerable<string> GetWizardNamesGroupedByCreatorLINQ()
