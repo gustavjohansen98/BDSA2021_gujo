@@ -19,7 +19,8 @@ namespace BDSA2020.Assignment03
 
         public IEnumerable<string> GetWizardnamesByCreatorExtension(string creator) 
         {
-            return wizards.Where( w => w.Creator.Contains(creator)).Select( x => x.Name);
+            return wizards.Where( w => w.Creator.Contains(creator))
+                          .Select( x => x.Name);
         } 
 
         public int? GetYearOfWizardFirstApperanceLINQ(string wizardName)
@@ -33,31 +34,39 @@ namespace BDSA2020.Assignment03
 
         public int? GetYearOfWizardFirstApperanceExtension(string wizardName)
         {
-            return wizards.Where( w => w.Name.Contains(wizardName)).Select( w => w.Year).Min();
+            return wizards.Where( w => w.Name.Contains(wizardName))
+                          .Select( w => w.Year).Min();
         }
 
-        public IEnumerable<Tuple<string, int?>> GetNamesAndYearsFromMediaLINQ(string media)
+        public IEnumerable<(string, int?)> GetNamesAndYearsFromMediaLINQ(string media)
         {
             var result = from w in wizards
                          where w.Medium.Equals(media)
-                         select new Tuple<string, int?>(w.Name, w.Year);
+                         select (w.Name, w.Year);
 
             return result;
         }
 
         public IEnumerable<(string, int?)> GetNamesAndYearsFromMediaExtension(string media)
         {
-            return wizards.Where( w => w.Medium.Equals(media)).Select(w => (w.Name, w.Year));
+            return wizards.Where( w => w.Medium.Equals(media))
+                          .Select(w => (w.Name, w.Year));
         }
 
         public IEnumerable<string> GetWizardNamesGroupedByCreatorLINQ()
         {
-            throw new NotImplementedException();
+            var results = from w in wizards
+                          orderby w.Creator descending, w.Name descending
+                          group w.Name by w.Creator;
+            return results.Flatten();
         }
 
         public IEnumerable<string> GetWizardNamesGroupedByCreatorExtension()
         {
-            throw new NotImplementedException();
+            return wizards.OrderByDescending(w => w.Creator)
+                          .ThenByDescending(w => w.Name)
+                          .GroupBy(w => w.Creator, w => w.Name)
+                          .Flatten();
         }
     }
 }

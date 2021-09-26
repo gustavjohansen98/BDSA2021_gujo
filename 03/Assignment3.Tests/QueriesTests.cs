@@ -1,6 +1,8 @@
 using System;
 using Xunit;
 using BDSA2020.Assignment03;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BDSA2020.Assignment03.Tests
 {
@@ -32,6 +34,51 @@ namespace BDSA2020.Assignment03.Tests
 
             Assert.Equal(year, actual_Extension);
             Assert.Equal(year, actual_linq);
+        }
+
+        [Fact]
+        public void Given_Harry_Potter_return_wizard_and_year()
+        {
+            var actual_Extension = q.GetNamesAndYearsFromMediaExtension("Harry Potter");
+            var actual_linq = q.GetNamesAndYearsFromMediaLINQ("Harry Potter");
+
+            var expected = new (string, int?)[]{
+                ("Albus Dumbledore", 1997),
+                ("Harry Potter", 1997),
+                ("Lord Voldemort", 1997),
+                ("Severus Snape", 1997),
+                ("Draco Malfoy", 1997),
+                ("Sirius Black", 1997),
+                ("Ron Wesley", 1997),
+            };
+
+            Assert.Equal(expected, actual_Extension);
+            Assert.Equal(expected, actual_linq);
+        }
+
+        [Fact]
+        public void Get_wizards_ordered_by_creator_desc()
+        {
+            var actual_Extension = q.GetWizardNamesGroupedByCreatorExtension().ToArray();
+            var actual_linq = q.GetWizardNamesGroupedByCreatorLINQ().ToArray();
+
+            IEnumerable<string> expected = new string[]{
+                "Sauron",
+                "Gandalf",
+                "Sirius Black",
+                "Severus Snape",
+                "Ron Wesley",
+                "Lord Voldemort",
+                "Harry Potter",
+                "Draco Malfoy",
+                "Albus Dumbledore",
+                "Master Yoda",
+                "Luke Skywalker",
+                "Darth Vader",
+            };
+
+            Assert.Equal(expected, actual_Extension);
+            Assert.Equal(expected, actual_linq);
         }
     }
 }
