@@ -16,7 +16,9 @@ namespace Assignment4.Entities
 
         public int? AssignedTo { get; set; } // id foreign key to User entity (should be optional)
 
+        #pragma warning disable         
         public string? Description { get; set; } 
+        #pragma warning restore
 
         [Required]
         [Column(TypeName = "nvarchar(24)")] // then we don't have to specify the string conversion override in OnModelCreating
