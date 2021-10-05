@@ -2,7 +2,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Assignment4.Entities
 {
-    public class KanbanContext : DbContext
+    public interface IKanbanContext
+    {
+        DbSet<Task> Tasks { get; set; }
+        DbSet<Tag> Tags { get; set; }
+        DbSet<User> Users { get; set; }
+
+        // int SaveChanges();
+    }
+    
+    public class KanbanContext : DbContext, IKanbanContext
     {
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Tag> Tags { get; set; }
