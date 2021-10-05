@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assignment4.Entities;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 using static Assignment4.Core.State;
 
 namespace Assignment4.Entities.Tests
@@ -59,7 +61,22 @@ namespace Assignment4.Entities.Tests
             context.AddRange(tags);
 
             context.SaveChanges();
+        }
 
+        [Fact]
+        public async void Db_available() => Assert.True(await _context.Database.CanConnectAsync());
+
+        [Fact]
+        public void should_produce_true_with_seed_method()
+        {
+            Seed(_context);
+            Assert.True(_context.Users.Any());
+        }
+
+        [Fact]
+        public void should_produce_false_without_seed_method()
+        {
+            Assert.False(_context.Users.Any());
         }
 
     }
