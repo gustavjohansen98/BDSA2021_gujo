@@ -27,8 +27,6 @@ namespace Assignment4.Entities.Tests
 
             _context = new KanbanContext(options);
             _context.Database.EnsureCreated();
-
-            // Seed(_context);
         }
 
         public void Dispose()
@@ -43,7 +41,7 @@ namespace Assignment4.Entities.Tests
             var users = new[] {
                 new User { Id = 1, Name = "Rasmus Lystrøm", Email = "rasmus@itu.dk"},
                 new User { Id = 2, Name = "Paolo Tell", Email = "paolo@itu.dk"},
-                new User { Id = 3, Name = "Gustav Johansen", Email = "gujo@itu.dk"},
+                new User { Id = 3, Name = "Gustav Johansen", Email = "gujo@itu.dk", Tasks = new List<Task>(), },
             };
 
             var tags = new[] {
@@ -52,8 +50,9 @@ namespace Assignment4.Entities.Tests
             };
 
             var tasks = new[] {
-                new Task { Id = 1, Title = "Complete assignment 4", Description = "Due date is this friday", State = Active,},
-                new Task { Id = 2, Title = "Hand in assignment 4", State = New,},
+                new Task { Id = 1, Title = "Complete assignment 4", Description = "Due date is this friday", State = Active, AssignedTo = 3},
+                new Task { Id = 2, Title = "Vask op", Description = "I dag", State = Active, AssignedTo = 3},
+                new Task { Id = 3, Title = "Hand in assignment 4", State = New,},
             };
 
             context.AddRange(users);

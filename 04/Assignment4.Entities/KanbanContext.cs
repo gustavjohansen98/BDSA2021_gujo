@@ -8,7 +8,7 @@ namespace Assignment4.Entities
         DbSet<Tag> Tags { get; set; }
         DbSet<User> Users { get; set; }
 
-        // int SaveChanges();
+        int SaveChanges();
     }
     
     public class KanbanContext : DbContext, IKanbanContext
