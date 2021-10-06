@@ -24,6 +24,6 @@ namespace Assignment4.Entities
         [Column(TypeName = "nvarchar(24)")] // then we don't have to specify the string conversion override in OnModelCreating
         public State State { get; set; }
 
-        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Tag> Tags { get; set; } = new List<Tag>();
     }
 }

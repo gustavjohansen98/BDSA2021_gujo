@@ -37,12 +37,15 @@ namespace Assignment4.Entities
 
             var assignedToUser = _context.Tasks.Where(e => e.AssignedTo == user.Id);
 
-            if ((user.Tasks != null || assignedToUser.Any()) && !force)
+            if ((user.Tasks.Any() || assignedToUser.Any()) && !force)
             {
                 return Conflict;
             } 
-            else if ((user.Tasks != null || assignedToUser.Any()) && force)
+            else if ((user.Tasks.Any() || assignedToUser.Any()) && force)
             {
+                // cascade deletion of foreign key is neccessary, since the foreign key is nullable
+                // had it not been nullable, ef core would have done it automatically :
+                // https://docs.microsoft.com/en-us/ef/core/saving/cascade-delete
                 _context.Users.Remove(user);
                 assignedToUser.AsEnumerable().ToList().ForEach(e => e.AssignedTo = null);
                 _context.SaveChanges();
