@@ -43,7 +43,7 @@ namespace Assignment4.Entities
             } 
             else if ((user.Tasks.Any() || assignedToUser.Any()) && force)
             {
-                // cascade deletion of foreign key is neccessary, since the foreign key is nullable
+                // manual cascade deletion of foreign key is neccessary, since the foreign key is nullable
                 // had it not been nullable, ef core would have done it automatically :
                 // https://docs.microsoft.com/en-us/ef/core/saving/cascade-delete
                 _context.Users.Remove(user);
